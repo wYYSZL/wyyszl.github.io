@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>花神游历各国 | wYYSZL 的博客</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://wyyszl.github.io/favicon.ico?v=1602253422486">
+<link rel="stylesheet" href="https://wyyszl.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="原题链接
+解题思路：
+     ~~~~~      考虑到区间开根号不好维护区间和，即 sumsumsum 值不易维护，不能使用延迟标记来区间修改，只能单点修改。单点修改的时间复杂度乍一看是 O(n m logn)O(n~m~logn)O..." />
+    <meta name="keywords" content="线段树" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://wyyszl.github.io">
+        <img src="https://wyyszl.github.io/images/avatar.png?v=1602253422486" class="site-logo">
+        <h1 class="site-title">wYYSZL 的博客</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/wYYSZL">wYYSZL</a> | <a class="rss" href="https://wyyszl.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">花神游历各国</h2>
+            <div class="post-date">2020-10-09</div>
+            
+            <div class="post-content" v-pre>
+              <h3 id="原题链接"><a href="http://ybt.ssoier.cn:8088/problem_show.php?pid=1550">原题链接</a></h3>
+<p>解题思路：<br>
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext>     </mtext></mrow><annotation encoding="application/x-tex">~~~~~</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span></span></span></span> 考虑到区间开根号不好维护区间和，即 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>u</mi><mi>m</mi></mrow><annotation encoding="application/x-tex">sum</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">u</span><span class="mord mathdefault">m</span></span></span></span> 值不易维护，不能使用延迟标记来区间修改，只能单点修改。单点修改的时间复杂度乍一看是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mtext> </mtext><mi>m</mi><mtext> </mtext><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n~m~logn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace nobreak"> </span><span class="mord mathdefault">m</span><span class="mspace nobreak"> </span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>，但这道题有一定的特征，其特征主要在于开根号的一些特征： <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msqrt><mn>1</mn></msqrt><mo>=</mo><mn>1</mn><mtext>      </mtext><msqrt><mn>0</mn></msqrt><mo>=</mo><mn>0</mn><mtext>   </mtext></mrow><annotation encoding="application/x-tex">\sqrt{1}=1~~~~~~\sqrt{0}=0~~~</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.04em;vertical-align:-0.13278em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.90722em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord">1</span></span></span><span style="top:-2.86722em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg width='400em' height='1.08em' viewBox='0 0 400000 1080' preserveAspectRatio='xMinYMin slice'><path d='M95,702c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,
+-10,-9.5,-14c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54c44.2,-33.3,65.8,
+-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10s173,378,173,378c0.7,0,
+35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429c69,-144,104.5,-217.7,106.5,
+-221c5.3,-9.3,12,-14,20,-14H400000v40H845.2724s-225.272,467,-225.272,467
+s-235,486,-235,486c-2.7,4.7,-9,7,-19,7c-6,0,-10,-1,-12,-3s-194,-422,-194,-422
+s-65,47,-65,47z M834 80H400000v40H845z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.13278em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.04em;vertical-align:-0.13278em;"></span><span class="mord">1</span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.90722em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord">0</span></span></span><span style="top:-2.86722em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg width='400em' height='1.08em' viewBox='0 0 400000 1080' preserveAspectRatio='xMinYMin slice'><path d='M95,702c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,
+-10,-9.5,-14c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54c44.2,-33.3,65.8,
+-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10s173,378,173,378c0.7,0,
+35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429c69,-144,104.5,-217.7,106.5,
+-221c5.3,-9.3,12,-14,20,-14H400000v40H845.2724s-225.272,467,-225.272,467
+s-235,486,-235,486c-2.7,4.7,-9,7,-19,7c-6,0,-10,-1,-12,-3s-194,-422,-194,-422
+s-65,47,-65,47z M834 80H400000v40H845z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.13278em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span></span></span></span>。 因而如果一个节点表示的区间都为 1 or 0，那么这个节点和其所有子节点就无需更改。对于每一个非负数，进行数次操作后都可以变为 0 or 1。又因为题目中<code>每个数开平方(下取整)</code>,所以我们对于每一个数仅需要 &lt;= 6 次操作就可以变为 1 or 0 。综上，我们可以把区间修改改为单点修改，搜到一个表示的区间都为 1 or 0 的点就停止操作，而区间查询正常。<br>
+解题细节：<br>
+$~~~~~$1.如何确定一个区间书否都是 1 or 0：打标记或维护最大值（我使用前者，但事实上后者方便一些）。</p>
+<h3 id="综上便有了以下错误代码">综上，便有了以下错误代码：</h3>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+
+using namespace std;
+int n,m;
+int a[100005];
+int x,l,r;
+struct P{
+   int l,r;
+   int sum;
+   bool flag;
+}tree[400050];
+void pushup(int t){
+   tree[t].sum =tree[t*2].sum +tree[t*2+1].sum ;
+   if(tree[t*2].flag and tree[t*2+1].flag )tree[t].flag=1;
+   if(tree[t].flag ) tree[t].sum =tree[t].r-tree[t].l+1;
+   return;
+}
+void build(int t,int l,int r){
+   tree[t].l =l;
+   tree[t].r =r;
+   if(l==r){
+   	tree[t].sum =a[l];
+   	if(l==1)tree[t].flag=1;
+   	return;
+   }
+   int mid=(l+r)/2.0;
+   build(t*2,l,mid);
+   build(t*2+1,mid+1,r);
+   pushup(t);
+   return;
+}
+int qcheck(int t,int l,int r){
+   if(l&lt;=tree[t].l and tree[t].r &lt;=r){
+   	return tree[t].sum ;
+   }
+   int mid=(tree[t].l +tree[t].r)/2.0;
+   int ans=0;
+   if(l&lt;=mid)ans=qcheck(t*2,l,r);
+   if(r&gt;mid)ans+=qcheck(t*2+1,l,r);
+   return ans;
+}
+void cnote(int t,int l){
+   if(tree[t].l ==tree[t].r ){
+   	tree[t].sum =sqrt(tree[t].sum );
+   	if(not(tree[t].sum -1) )tree[t].flag=1;
+   	return;
+   }
+   int mid=(tree[t].l +tree[t].r )/2.0;
+   if(l&lt;=mid)cnote(t*2,l);
+   else cnote(t*2+1,l);
+   pushup(t);
+   return;
+}
+int main(){
+   ios::sync_with_stdio(0);
+   cin&gt;&gt;n;
+   for(int i=1;i&lt;=n;++i){
+   	cin&gt;&gt;a[i];
+   }
+   build(1,1,n);
+   cin&gt;&gt;m;
+   for(int i=1;i&lt;=m;++i){
+   	cin&gt;&gt;x&gt;&gt;l&gt;&gt;r;
+   	if(not(x-1)){
+   		cout&lt;&lt;qcheck(1,l,r)&lt;&lt;endl;;
+   	}else{
+   		for(int j=l;j&lt;=r;++j){
+   			cnote(1,j);
+   		}
+   	}
+   }
+   return 0;
+}
+</code></pre>
+<h4 id="tle-20pts">TLE 20pts</h4>
+<p>根据上面的分析，该代码的复杂度应该为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>k</mi><mtext> </mtext><mi>m</mi><mtext> </mtext><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(k~m~logn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace nobreak"> </span><span class="mord mathdefault">m</span><span class="mspace nobreak"> </span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> ,但该代码在枚举单点修改时复杂度已经达到 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mtext> </mtext><mi>m</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n~m)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace nobreak"> </span><span class="mord mathdefault">m</span><span class="mclose">)</span></span></span></span> 。<br>
+细节2：单点修改要和区间修改融合而不是直接枚举修改。</p>
+<h2 id="错误代码2">错误代码2：</h2>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+#define int long long
+using namespace std;
+int n,m;
+int a[100005];
+int x,l,r;
+struct P {
+	int l,r;
+	int sum;
+	bool flag;
+} tree[400050];
+void pushup(int t) {
+	tree[t].sum =tree[t*2].sum +tree[t*2+1].sum ;
+	if(tree[t*2].flag and tree[t*2+1].flag )tree[t].flag=1;
+  if(tree[t].flag)tree[t].sum=tree[t].r-tree[t].l+1;
+	return;
+}
+void build(int t,int l,int r) {
+	tree[t].l =l;
+	tree[t].r =r;
+	if(l==r) {
+		tree[t].sum =a[l];
+		if(a[l]==1 or (not a[l]))tree[t].flag=1;
+		return;
+	}
+	int mid=(l+r)/2.0;
+	build(t*2,l,mid);
+	build(t*2+1,mid+1,r);
+	pushup(t);
+	return;
+}
+int qcheck(int t,int l,int r) {
+	if(l&lt;=tree[t].l and tree[t].r &lt;=r) {
+		return tree[t].sum ;
+	}
+	int mid=(tree[t].l +tree[t].r)/2.0;
+	int ans=0;
+	if(l&lt;=mid)ans=qcheck(t*2,l,r);
+	if(r&gt;mid)ans+=qcheck(t*2+1,l,r);
+	pushup(t);
+	return ans;
+}
+void cnote(int t,int l,int r) {
+	if(tree[t].flag )return;
+	if(tree[t].l ==tree[t].r ) {
+		tree[t].sum =(int)sqrt(tree[t].sum );
+		if(not(tree[t].sum -1) or not(tree[t].sum ))tree[t].flag=1;
+		return;
+	}
+	int mid=(tree[t].l +tree[t].r )/2.0;
+	if(l&lt;=mid)cnote(t*2,l,r);
+	if(r&gt;mid) cnote(t*2+1,l,r);
+	pushup(t);
+	return;
+}
+signed main() {
+//	freopen(&quot;11.in&quot;,&quot;r&quot;,stdin);
+//	freopen(&quot;11.out&quot;,&quot;w&quot;,stdout);
+    ios::sync_with_stdio(0);
+	cin&gt;&gt;n;
+	for(int i=1; i&lt;=n; ++i) {
+		cin&gt;&gt;a[i];
+	}
+	build(1,1,n);
+	cin&gt;&gt;m;
+	for(int i=1; i&lt;=m; ++i) {
+		cin&gt;&gt;x&gt;&gt;l&gt;&gt;r;
+		if(not(x-1)) {
+			cout&lt;&lt;qcheck(1,l,r)&lt;&lt;endl;;;;;;;;;
+		} else {
+			if(l&gt;r){
+				l xor_eq r;
+				r xor_eq l;
+				l xor_eq r;
+			}
+			cnote(1,l,r);
+		}
+	}
+	return 0;
+}
+</code></pre>
+<p>该代码问题在于这句话：<code>if(tree[t].flag)tree[t].sum=tree[t].r-tree[t].l+1;</code>这行代码忽略了数字为 0 的情况。<br>
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext>    </mtext></mrow><annotation encoding="application/x-tex">~~~~</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span></span></span></span>细节3：数字可能为 0。</p>
+<h2 id="ac-代码">AC 代码：</h2>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+#define int long long
+using namespace std;
+int n,m;
+int a[100005];
+int x,l,r;
+struct P {
+	int l,r;
+	int sum;
+	bool flag;
+} tree[400050];
+void pushup(int t) {
+	tree[t].sum =tree[t*2].sum +tree[t*2+1].sum ;
+	if(tree[t*2].flag and tree[t*2+1].flag )tree[t].flag=1;
+	return;
+}
+void build(int t,int l,int r) {
+	tree[t].l =l;
+	tree[t].r =r;
+	if(l==r) {
+		tree[t].sum =a[l];
+		if(a[l]==1 or (not a[l]))tree[t].flag=1;
+		return;
+	}
+	int mid=(l+r)/2.0;
+	build(t*2,l,mid);
+	build(t*2+1,mid+1,r);
+	pushup(t);
+	return;
+}
+int qcheck(int t,int l,int r) {
+	if(l&lt;=tree[t].l and tree[t].r &lt;=r) {
+		return tree[t].sum ;
+	}
+	int mid=(tree[t].l +tree[t].r)/2.0;
+	int ans=0;
+	if(l&lt;=mid)ans=qcheck(t*2,l,r);
+	if(r&gt;mid)ans+=qcheck(t*2+1,l,r);
+	pushup(t);
+	return ans;
+}
+void cnote(int t,int l,int r) {
+	if(tree[t].flag )return;
+	if(tree[t].l ==tree[t].r ) {
+		tree[t].sum =(int)sqrt(tree[t].sum );
+		if(not(tree[t].sum -1) or not(tree[t].sum ))tree[t].flag=1;
+		return;
+	}
+	int mid=(tree[t].l +tree[t].r )/2.0;
+	if(l&lt;=mid)cnote(t*2,l,r);
+	if(r&gt;mid) cnote(t*2+1,l,r);
+	pushup(t);
+	return;
+}
+signed main() {
+//	freopen(&quot;11.in&quot;,&quot;r&quot;,stdin);
+//	freopen(&quot;11.out&quot;,&quot;w&quot;,stdout);
+    ios::sync_with_stdio(0);
+	cin&gt;&gt;n;
+	for(int i=1; i&lt;=n; ++i) {
+		cin&gt;&gt;a[i];
+	}
+	build(1,1,n);
+	cin&gt;&gt;m;
+	for(int i=1; i&lt;=m; ++i) {
+		cin&gt;&gt;x&gt;&gt;l&gt;&gt;r;
+        if(l&gt; r) swap(l,r);
+		if(not(x-1)) {
+			cout&lt;&lt;qcheck(1,l,r)&lt;&lt;endl;;;;;;;;;
+		} else {
+			cnote(1,l,r);
+		}
+	}
+	return 0;
+}
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://wyyszl.github.io/tag/ID2N-GiIZ/" class="tag">
+                    线段树
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://wyyszl.github.io/post/mo-ban-dai-wan-shan/">
+                  <h3 class="post-title">
+                    模板(待完善)
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>

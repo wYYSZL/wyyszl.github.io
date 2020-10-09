@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>标签列表 | wYYSZL 的博客</title>
+<title>模板(待完善) | wYYSZL 的博客</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -18,7 +18,18 @@
 
 
 
-    <meta name="description" content="">
+    <meta name="description" content="C++常用模版
+#include&lt;bits/stdc++.h&gt;
+
+using namespace std;
+
+class s_r {//快读
+	private:
+	public:
+		inline int read();
+};
+..." />
+    <meta name="keywords" content="" />
   </head>
   <body>
     <div id="app" class="main">
@@ -88,24 +99,99 @@
 
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
-          <h2 class="tag-list-title">标签列表</h2>
-          <div class="tags-container">
+          <div class="post-detail">
+            <h2 class="post-title">模板(待完善)</h2>
+            <div class="post-date">2020-10-09</div>
             
-              <a class="tag" href="https://wyyszl.github.io/tag/AmDYNAVx8/">OI</a>
+            <div class="post-content" v-pre>
+              <h1 id="c常用模版">C++常用模版</h1>
+<pre><code>#include&lt;bits/stdc++.h&gt;
+
+using namespace std;
+
+class s_r {//快读
+	private:
+	public:
+		inline int read();
+};
+class s_w {//快写
+	private:
+	public:
+		inline void write(int X);
+};
+class dfss {//DFS
+	private:
+		int n;
+		int a[25];
+		int b[25];
+		void dfs(int t);
+	public:
+		void main();
+};
+inline int s_r::read() {
+	int x=0,f=1;
+	char ch=getchar();
+	while(ch&lt;'0'||ch&gt;'9') {
+		if(ch=='-')
+			f=-1;
+		ch=getchar();
+	}
+	while(ch&gt;='0'&amp;&amp;ch&lt;='9') {
+		x=(x&lt;&lt;1)+(x&lt;&lt;3)+(ch^48);
+		ch=getchar();
+	}
+	return x*f;
+}
+inline void s_w::write(int X) {
+	if(X&lt;0) {
+		X=~(X-1);
+		putchar('-');
+	}
+	if(X&gt;9) write(X/10);
+	putchar(X%10+'0');
+	return;
+}
+void dfss::dfs(int t) {
+	if(t==n+1) {
+		for(int i=1; i&lt;=n; ++i) {
+			cout&lt;&lt;a[i]&lt;&lt;' ';
+		}
+		cout&lt;&lt;endl;
+		return ;
+	}
+	for(int i=1; i&lt;=n; ++i) {
+		if(!b[i]) {
+			b[i]=1;
+			a[t]=i;
+			dfs(t+1);
+			b[i]=0;
+		}
+	}
+	return ;
+}
+void dfss::main () {
+	cin&gt;&gt;n;
+	dfs(1);
+}
+</code></pre>
+
+            </div>
             
-              <a class="tag" href="https://wyyszl.github.io/tag/rA1JTWKMG/">DP</a>
             
-              <a class="tag" href="https://wyyszl.github.io/tag/Epmw5nbes/">灌水</a>
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://wyyszl.github.io/post/wo-men-wei-shi-me-bu-liu-xia-dong-xi/">
+                  <h3 class="post-title">
+                    我们为什么不留下东西
+                  </h3>
+                </a>
+              </div>
             
-              <a class="tag" href="https://wyyszl.github.io/tag/ID2N-GiIZ/">线段树</a>
+
             
-              <a class="tag" href="https://wyyszl.github.io/tag/zOB1Epyka/">dij</a>
-            
-              <a class="tag" href="https://wyyszl.github.io/tag/IPyiUlzMb/">题解</a>
-            
-              <a class="tag" href="https://wyyszl.github.io/tag/lmZnRdfDa/">BFS</a>
-            
+
           </div>
+
         </div>
       </div>
     </div>

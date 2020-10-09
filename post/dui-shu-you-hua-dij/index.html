@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>对数优化dij | wYYSZL 的博客</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://wyyszl.github.io/favicon.ico?v=1602253422486">
+<link rel="stylesheet" href="https://wyyszl.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="1.复习邻接表
+链表结构，将每个点x出发的邻边链起来，用hd[x]记录每个条边的编号，说明这些边号是与x相关的。
+链表：
+原型：
+struct P{
+	int to,nxt,dis;
+}line[MAXM]//如果是无向图，数组大小为MAX..." />
+    <meta name="keywords" content="dij" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://wyyszl.github.io">
+        <img src="https://wyyszl.github.io/images/avatar.png?v=1602253422486" class="site-logo">
+        <h1 class="site-title">wYYSZL 的博客</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/wYYSZL">wYYSZL</a> | <a class="rss" href="https://wyyszl.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">对数优化dij</h2>
+            <div class="post-date">2020-10-09</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="1复习邻接表">1.复习邻接表</h1>
+<p>链表结构，将每个点x出发的邻边链起来，用hd[x]记录每个条边的编号，说明这些边号是与x相关的。<br>
+链表：<br>
+原型：</p>
+<pre><code class="language-cpp">struct P{
+	int to,nxt,dis;
+}line[MAXM]//如果是无向图，数组大小为MAXN*2
+
+</code></pre>
+<p>初始化：</p>
+<pre><code class="language-cpp">	memset(hd,-1,sieof hd);
+	num=0;
+</code></pre>
+<p>添加：</p>
+<pre><code class="language-cpp">void add(int x,int y,int z){//x到y有距离为z的单向边(数列前向星)
+	num++;
+	line[num].dis = z;
+	line[num].nxt = hd[x];
+	line[num].to  = y;
+	hd[x]=num;
+}
+</code></pre>
+<p>遍历：</p>
+<pre><code class="language-cpp">for(int i=hd[u];i!=-1;i=line[i].nxt){
+	...
+}
+</code></pre>
+<h1 id="2复习堆">2.复习堆</h1>
+<ol>
+<li>定义：priority_queue<int>dl;<br>
+整型优先队列。<br>
+默认大根堆</li>
+<li>相关语法：</li>
+</ol>
+<pre><code class="language-cpp">dl.push(...);   
+...=dl.top();   
+dl.pop();   
+dl.empty();   
+dl.size();  
+</code></pre>
+<ol start="3">
+<li>堆排序</li>
+</ol>
+<pre><code class="language-cpp">#include&lt;queue&gt;
+#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+priority_queue &lt;int&gt; q;
+int x;
+int main(){
+int n;scanf(&quot;%d&quot;,&amp;n);
+for(int i=1;i&lt;=n;i++){
+  scanf(&quot;%d&quot;,&amp;x);
+  q.push(x);
+}
+for(int i=1;i&lt;=n;i++){
+  printf(&quot;%d &quot;,q.top());
+  q.pop();
+}
+}
+
+</code></pre>
+<p>4.大变小</p>
+<pre><code class="language-cpp">priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; dl; 
+  
+</code></pre>
+<p>0</p>
+<pre><code class="language-cpp">bool operator &lt; (const Node&amp; x)const{
+  return dis &gt; x.dis;
+}
+</code></pre>
+<h1 id="3dij">3.dij</h1>
+<p>1.基于贪心的想法<br>
+2.以1为起点，所有点当中一定至少可以确定一条最短路，即这条最短路不会被其他点再次更新。</p>
+<p>3.之后又会诞生至少一条最短路，用其更新别的点，此后所有边中一定又会诞生出一条最短路</p>
+<p>4.以此类推</p>
+<h1 id="堆优化">堆优化</h1>
+<p>因为每次都找已经是最短路的点，考虑用堆实现，o(n)-&gt;o(logn)<br>
+每次找已经是最短路的一点，去更新他点(松弛)<br>
+但是考虑一个点会被多次更新，入堆，因此堆中会存留不是最短路的点。而这个点一旦松弛完别人它的使命就结束了。堆中他的 “余党”就不能松弛别人了。</p>
+<h3 id="板子">板子</h3>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+
+using namespace std;
+int num;
+int n,m,s;
+int x,y,z;
+int dis[100005],vis[100005];
+int hd[100005];
+struct P{
+  int dis,to,nxt;
+}line[200005];
+void add(int x,int y,int z){
+  num++;
+  line[num].dis =z;
+  line[num].nxt =hd[x];
+  line[num].to =y;
+  hd[x]=num;
+}
+struct Node{
+  int id,dis;
+  bool operator &lt; (const Node&amp; x)const{
+  	return dis &gt; x.dis ;
+  }
+  Node(){}
+  Node(int x,int y){id=x,dis=y;}
+};
+priority_queue&lt;Node&gt; dl;
+void dij(){
+  while(!dl.empty()){
+  	Node l=dl.top();
+  	dl.pop();
+  	int u=l.id ,v=l.dis ;
+  	if(vis[u])continue;
+  	vis[u]=1;
+  	for(int i=hd[u];i!=-1;i=line[i].nxt ){
+  		if(dis[line[i].to ]&gt;dis[u]+line[i].dis ){
+  			dis[line[i].to ]=dis[u]+line[i].dis;
+  			dl.push(Node(line[i].to ,dis[line[i].to ]));
+  		}
+  	}
+  }
+}
+int main() {
+  cin&gt;&gt;n&gt;&gt;m&gt;&gt;s;
+  memset(hd,-1,sizeof hd);
+  for(int i=1;i&lt;=m;i++){
+  	cin&gt;&gt;x&gt;&gt;y&gt;&gt;z;
+  	add(x,y,z);
+  }
+  memset(dis,0x3f,sizeof dis);
+  dis[s]=0;
+  dl.push(Node(s,0));
+  dij();
+  for(int i=1;i&lt;=n;i++){
+  	cout&lt;&lt;dis[i]&lt;&lt;' ';
+  }
+  return 0;
+}
+
+
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://wyyszl.github.io/tag/zOB1Epyka/" class="tag">
+                    dij
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://wyyszl.github.io/post/ti-jie-p6056-jia-you-wu-han-sir-mo-xing/">
+                  <h3 class="post-title">
+                    题解 P6056 【[加油武汉]SIR 模型】
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>题解 P6056 【[加油武汉]SIR 模型】 | wYYSZL 的博客</title>
+<title>一些比较（待完善） | wYYSZL 的博客</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -18,14 +18,12 @@
 
 
 
-    <meta name="description" content="这是一道微坑水题
-注意：
-1.⌈⌉是向上取整（not floor()）
-2.结算的结果只和当天开始的时候的值有关，即感染者当天恢复不影响他当天感染别人。
-3.若计算被感染人数超过易感者人数则全员被感染。
-上AC代码
-#include&lt;..." />
-    <meta name="keywords" content="题解" />
+    <meta name="description" content="一、输入输出比较
+1.输入整形（以 2147483647 为例）
+
+无优化 cin：1 time=0.005684 ms，1 s=175932 times
+有优化 cin 1 time=0.001723 ms，1 s=580383 time..." />
+    <meta name="keywords" content="灌水" />
   </head>
   <body>
     <div id="app" class="main">
@@ -96,61 +94,60 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">题解 P6056 【[加油武汉]SIR 模型】</h2>
+            <h2 class="post-title">一些比较（待完善）</h2>
             <div class="post-date">2020-10-09</div>
             
             <div class="post-content" v-pre>
-              <h3 id="这是一道微坑水题">这是一道微坑水题</h3>
-<p>注意：<br>
-1.⌈⌉是向上取整（not floor()）<br>
-2.结算的结果只和当天开始的时候的值有关，即感染者当天恢复不影响他当天感染别人。<br>
-3.若计算被感染人数超过易感者人数则全员被感染。</p>
-<h5 id="上ac代码">上AC代码</h5>
-<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;//不解释
-using namespace std;
-int s,I,r,n;//大小写
-int main()
-{   
-    double a,b;
-	cin&gt;&gt;s&gt;&gt;I&gt;&gt;n&gt;&gt;a&gt;&gt;b;
-    for(register int i = 1;i &lt;= n;i++){
-        int si=s,ii = I,ri = r;
-        r += ceil(ii * b);
-        I -= ceil(ii * b);
-        I += ceil(a * si * ii);
-        s -= ceil(a * si * ii);//不是floor
-        if(s &lt; 0){I += s;s = 0;}
-        if(I &lt; 0){I = 0;r += I;}//千万不要丢
-    }
-    cout&lt;&lt;s&lt;&lt;' '&lt;&lt;I&lt;&lt;' '&lt;&lt;r;
-}
-</code></pre>
-<h5 id="上wa一点代码">上WA一点代码</h5>
-<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-int s,I,r,n;
-int main()
-{   
-    double a,b;
-	cin&gt;&gt;s&gt;&gt;I&gt;&gt;n&gt;&gt;a&gt;&gt;b;
-    for(register int i = 1;i &lt;= n;i++){
-        int si=s,ii = I,ri = r;
-        r += ceil(ii * b);
-        I -= ceil(ii * b);
-        I += ceil(a * si * ii);
-        s -= ceil(a * si * ii);
-    }
-    cout&lt;&lt;s&lt;&lt;' '&lt;&lt;I&lt;&lt;' '&lt;&lt;r;
-}
-</code></pre>
-<p>第一篇题解求过~</p>
+              <h2 id="一-输入输出比较">一、输入输出比较</h2>
+<h4 id="1输入整形以-2147483647-为例">1.输入整形（以 2147483647 为例）</h4>
+<ul>
+<li>无优化 cin：1 time=0.005684 ms，1 s=175932 times</li>
+<li>有优化 cin 1 time=0.001723 ms，1 s=580383 times</li>
+<li>scanf：1time=0.002501 ms，1s=399840  times</li>
+<li>快读：1time=0.000978ms，1s=1024590 times</li>
+</ul>
+<h4 id="2输出整形以-2147483647-为例">2.输出整形（以 2147483647 为例）</h4>
+<ul>
+<li>无优化 cout：1 time=0.001498 ms，1 s=667557 times</li>
+<li>有优化 cout：1time=0.001522ms，1 s=657030 times（我感觉加了个假优化(((）</li>
+<li>printf ：1 time=0.004952ms，1s=201939 times</li>
+<li>快写：1time =0.001519 ms，1s=658328 times（这能叫快写？）</li>
+</ul>
+<h4 id="3输出字符串10-位">3.输出字符串(10 位)</h4>
+<ul>
+<li>cout:1time=0.0004658ms,1s = 2146844 times</li>
+<li>printf: 1time=0.0038ms,1s= 263157 times</li>
+<li>putchar:1time=0.0009758ms,1s= 1024700 times</li>
+<li>puts:1time=0.000208 ms,1s= 4807692 times</li>
+</ul>
+<h4 id="4输出换行">4.输出换行</h4>
+<ul>
+<li>cout&lt;&lt;'\n':1 time=0.0002811ms,1s= 3557453 times</li>
+<li>cout&lt;&lt;endl:1 time=0.002866 ms,1s= 348918 times(同是 cout 生，为何慢 10 倍。。。)</li>
+<li>printf：1 time=0.002913 ms,1s= 343289 times</li>
+<li>puts:1time=0.0001314 ms,1s= 7610350 times</li>
+</ul>
+<h2 id="二-i-i">二、++i &amp; i++</h2>
+<ul>
+<li>++i: 1time=0.000002121 ms,1s= 471475719 times</li>
+<li>i++:1time=0.000002473 ms,1s= 404367165 times</li>
+</ul>
+<h2 id="三-ri-int">三、ri &amp; int</h2>
+<ul>
+<li>register int: 1time=0.000002121 ms,1s= 471475719 times</li>
+<li>int:1 time=0.00000248 ms,1s= 403225806 times</li>
+</ul>
+<h2 id="四-stl-手写">四、stl &amp; 手写</h2>
+<h2 id="五-位运算">五、位运算 &amp; * /</h2>
+<h2 id="六-signed-unsigned">六、signed &amp; unsigned</h2>
+<h3 id="注所有测试都在性能较差的-windows7-电脑下进行">注：所有测试都在性能较差的 Windows7 电脑下进行</h3>
 
             </div>
             
               <div class="tag-container">
                 
-                  <a href="https://wyyszl.github.io/tag/IPyiUlzMb/" class="tag">
-                    题解
+                  <a href="https://wyyszl.github.io/tag/Epmw5nbes/" class="tag">
+                    灌水
                   </a>
                 
               </div>
@@ -158,9 +155,9 @@ int main()
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://wyyszl.github.io/post/kuan-du-you-xian-sou-suo-ru-men/">
+                <a href="https://wyyszl.github.io/post/hua-shen-you-li-ge-guo/">
                   <h3 class="post-title">
-                    宽度优先搜索（入门）
+                    花神游历各国
                   </h3>
                 </a>
               </div>
