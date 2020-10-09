@@ -2,13 +2,65 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wyyszl.github.io</id>
     <title>wYYSZL 的博客</title>
-    <updated>2020-10-09T12:34:54.108Z</updated>
+    <updated>2020-10-09T12:46:14.564Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wyyszl.github.io"/>
     <link rel="self" href="https://wyyszl.github.io/atom.xml"/>
     <logo>https://wyyszl.github.io/images/avatar.png</logo>
     <icon>https://wyyszl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, wYYSZL 的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[题解 P6056 【[加油武汉]SIR 模型】]]></title>
+        <id>https://wyyszl.github.io/post/ti-jie-p6056-jia-you-wu-han-sir-mo-xing/</id>
+        <link href="https://wyyszl.github.io/post/ti-jie-p6056-jia-you-wu-han-sir-mo-xing/">
+        </link>
+        <updated>2020-10-09T12:45:03.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="这是一道微坑水题">这是一道微坑水题</h3>
+<p>注意：<br>
+1.⌈⌉是向上取整（not floor()）<br>
+2.结算的结果只和当天开始的时候的值有关，即感染者当天恢复不影响他当天感染别人。<br>
+3.若计算被感染人数超过易感者人数则全员被感染。</p>
+<h5 id="上ac代码">上AC代码</h5>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;//不解释
+using namespace std;
+int s,I,r,n;//大小写
+int main()
+{   
+    double a,b;
+	cin&gt;&gt;s&gt;&gt;I&gt;&gt;n&gt;&gt;a&gt;&gt;b;
+    for(register int i = 1;i &lt;= n;i++){
+        int si=s,ii = I,ri = r;
+        r += ceil(ii * b);
+        I -= ceil(ii * b);
+        I += ceil(a * si * ii);
+        s -= ceil(a * si * ii);//不是floor
+        if(s &lt; 0){I += s;s = 0;}
+        if(I &lt; 0){I = 0;r += I;}//千万不要丢
+    }
+    cout&lt;&lt;s&lt;&lt;' '&lt;&lt;I&lt;&lt;' '&lt;&lt;r;
+}
+</code></pre>
+<h5 id="上wa一点代码">上WA一点代码</h5>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int s,I,r,n;
+int main()
+{   
+    double a,b;
+	cin&gt;&gt;s&gt;&gt;I&gt;&gt;n&gt;&gt;a&gt;&gt;b;
+    for(register int i = 1;i &lt;= n;i++){
+        int si=s,ii = I,ri = r;
+        r += ceil(ii * b);
+        I -= ceil(ii * b);
+        I += ceil(a * si * ii);
+        s -= ceil(a * si * ii);
+    }
+    cout&lt;&lt;s&lt;&lt;' '&lt;&lt;I&lt;&lt;' '&lt;&lt;r;
+}
+</code></pre>
+<p>第一篇题解求过~</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[宽度优先搜索（入门）]]></title>
         <id>https://wyyszl.github.io/post/kuan-du-you-xian-sou-suo-ru-men/</id>

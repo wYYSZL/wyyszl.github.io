@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>题解 P6056 【[加油武汉]SIR 模型】 | wYYSZL 的博客</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://wyyszl.github.io/favicon.ico?v=1602247571080">
+<link rel="stylesheet" href="https://wyyszl.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="这是一道微坑水题
+注意：
+1.⌈⌉是向上取整（not floor()）
+2.结算的结果只和当天开始的时候的值有关，即感染者当天恢复不影响他当天感染别人。
+3.若计算被感染人数超过易感者人数则全员被感染。
+上AC代码
+#include&lt;..." />
+    <meta name="keywords" content="题解" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://wyyszl.github.io">
+        <img src="https://wyyszl.github.io/images/avatar.png?v=1602247571080" class="site-logo">
+        <h1 class="site-title">wYYSZL 的博客</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/wYYSZL">wYYSZL</a> | <a class="rss" href="https://wyyszl.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">题解 P6056 【[加油武汉]SIR 模型】</h2>
+            <div class="post-date">2020-10-09</div>
+            
+            <div class="post-content" v-pre>
+              <h3 id="这是一道微坑水题">这是一道微坑水题</h3>
+<p>注意：<br>
+1.⌈⌉是向上取整（not floor()）<br>
+2.结算的结果只和当天开始的时候的值有关，即感染者当天恢复不影响他当天感染别人。<br>
+3.若计算被感染人数超过易感者人数则全员被感染。</p>
+<h5 id="上ac代码">上AC代码</h5>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;//不解释
+using namespace std;
+int s,I,r,n;//大小写
+int main()
+{   
+    double a,b;
+	cin&gt;&gt;s&gt;&gt;I&gt;&gt;n&gt;&gt;a&gt;&gt;b;
+    for(register int i = 1;i &lt;= n;i++){
+        int si=s,ii = I,ri = r;
+        r += ceil(ii * b);
+        I -= ceil(ii * b);
+        I += ceil(a * si * ii);
+        s -= ceil(a * si * ii);//不是floor
+        if(s &lt; 0){I += s;s = 0;}
+        if(I &lt; 0){I = 0;r += I;}//千万不要丢
+    }
+    cout&lt;&lt;s&lt;&lt;' '&lt;&lt;I&lt;&lt;' '&lt;&lt;r;
+}
+</code></pre>
+<h5 id="上wa一点代码">上WA一点代码</h5>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int s,I,r,n;
+int main()
+{   
+    double a,b;
+	cin&gt;&gt;s&gt;&gt;I&gt;&gt;n&gt;&gt;a&gt;&gt;b;
+    for(register int i = 1;i &lt;= n;i++){
+        int si=s,ii = I,ri = r;
+        r += ceil(ii * b);
+        I -= ceil(ii * b);
+        I += ceil(a * si * ii);
+        s -= ceil(a * si * ii);
+    }
+    cout&lt;&lt;s&lt;&lt;' '&lt;&lt;I&lt;&lt;' '&lt;&lt;r;
+}
+</code></pre>
+<p>第一篇题解求过~</p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://wyyszl.github.io/tag/IPyiUlzMb/" class="tag">
+                    题解
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://wyyszl.github.io/post/kuan-du-you-xian-sou-suo-ru-men/">
+                  <h3 class="post-title">
+                    宽度优先搜索（入门）
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>
