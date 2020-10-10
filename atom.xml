@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://wyyszl.top</id>
+    <id>https://wyyszl.github.io</id>
     <title>wYYSZL 的博客</title>
-    <updated>2020-10-10T11:38:36.895Z</updated>
+    <updated>2020-10-10T11:40:49.259Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://wyyszl.top"/>
-    <link rel="self" href="https://wyyszl.top/atom.xml"/>
-    <logo>https://wyyszl.top/images/avatar.png</logo>
-    <icon>https://wyyszl.top/favicon.ico</icon>
+    <link rel="alternate" href="https://wyyszl.github.io"/>
+    <link rel="self" href="https://wyyszl.github.io/atom.xml"/>
+    <logo>https://wyyszl.github.io/images/avatar.png</logo>
+    <icon>https://wyyszl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, wYYSZL 的博客</rights>
     <entry>
         <title type="html"><![CDATA[2020 CSP 初赛模拟题及答案]]></title>
-        <id>https://wyyszl.top/post/2020-csp-chu-sai-mo-ni-ti-ji-da-an/</id>
-        <link href="https://wyyszl.top/post/2020-csp-chu-sai-mo-ni-ti-ji-da-an/">
+        <id>https://wyyszl.github.io/post/2020-csp-chu-sai-mo-ni-ti-ji-da-an/</id>
+        <link href="https://wyyszl.github.io/post/2020-csp-chu-sai-mo-ni-ti-ji-da-an/">
         </link>
         <updated>2020-10-09T14:23:25.000Z</updated>
         <content type="html"><![CDATA[<p><a href="https://luogu-ipic.oss-cn-shanghai.aliyuncs.com/2020autumn/2020%20%E6%B4%9B%E8%B0%B7%E5%88%9D%E8%B5%9B%E6%A8%A1%E6%8B%9F.pdf">试题</a></p>
@@ -22,8 +22,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[P2758]]></title>
-        <id>https://wyyszl.top/post/p2758/</id>
-        <link href="https://wyyszl.top/post/p2758/">
+        <id>https://wyyszl.github.io/post/p2758/</id>
+        <link href="https://wyyszl.github.io/post/p2758/">
         </link>
         <updated>2020-10-09T14:22:58.000Z</updated>
         <content type="html"><![CDATA[<p>/*<br>
@@ -67,8 +67,8 @@ int main(){
     </entry>
     <entry>
         <title type="html"><![CDATA[一些比较（待完善）]]></title>
-        <id>https://wyyszl.top/post/yi-xie-bi-jiao-dai-wan-shan/</id>
-        <link href="https://wyyszl.top/post/yi-xie-bi-jiao-dai-wan-shan/">
+        <id>https://wyyszl.github.io/post/yi-xie-bi-jiao-dai-wan-shan/</id>
+        <link href="https://wyyszl.github.io/post/yi-xie-bi-jiao-dai-wan-shan/">
         </link>
         <updated>2020-10-09T14:22:21.000Z</updated>
         <content type="html"><![CDATA[<h2 id="一-输入输出比较">一、输入输出比较</h2>
@@ -118,8 +118,8 @@ int main(){
     </entry>
     <entry>
         <title type="html"><![CDATA[花神游历各国]]></title>
-        <id>https://wyyszl.top/post/hua-shen-you-li-ge-guo/</id>
-        <link href="https://wyyszl.top/post/hua-shen-you-li-ge-guo/">
+        <id>https://wyyszl.github.io/post/hua-shen-you-li-ge-guo/</id>
+        <link href="https://wyyszl.github.io/post/hua-shen-you-li-ge-guo/">
         </link>
         <updated>2020-10-09T14:21:47.000Z</updated>
         <content type="html"><![CDATA[<h3 id="原题链接"><a href="http://ybt.ssoier.cn:8088/problem_show.php?pid=1550">原题链接</a></h3>
@@ -382,8 +382,8 @@ signed main() {
     </entry>
     <entry>
         <title type="html"><![CDATA[模板(待完善)]]></title>
-        <id>https://wyyszl.top/post/mo-ban-dai-wan-shan/</id>
-        <link href="https://wyyszl.top/post/mo-ban-dai-wan-shan/">
+        <id>https://wyyszl.github.io/post/mo-ban-dai-wan-shan/</id>
+        <link href="https://wyyszl.github.io/post/mo-ban-dai-wan-shan/">
         </link>
         <updated>2020-10-09T14:21:09.000Z</updated>
         <content type="html"><![CDATA[<h1 id="c常用模版">C++常用模版</h1>
@@ -460,8 +460,8 @@ void dfss::main () {
     </entry>
     <entry>
         <title type="html"><![CDATA[我们为什么不留下东西]]></title>
-        <id>https://wyyszl.top/post/wo-men-wei-shi-me-bu-liu-xia-dong-xi/</id>
-        <link href="https://wyyszl.top/post/wo-men-wei-shi-me-bu-liu-xia-dong-xi/">
+        <id>https://wyyszl.github.io/post/wo-men-wei-shi-me-bu-liu-xia-dong-xi/</id>
+        <link href="https://wyyszl.github.io/post/wo-men-wei-shi-me-bu-liu-xia-dong-xi/">
         </link>
         <updated>2020-10-09T14:20:21.000Z</updated>
         <content type="html"><![CDATA[<h1 id="here-are-the-reasons">here are the reasons：</h1>
@@ -482,8 +482,8 @@ void dfss::main () {
     </entry>
     <entry>
         <title type="html"><![CDATA[对数优化dij]]></title>
-        <id>https://wyyszl.top/post/dui-shu-you-hua-dij/</id>
-        <link href="https://wyyszl.top/post/dui-shu-you-hua-dij/">
+        <id>https://wyyszl.github.io/post/dui-shu-you-hua-dij/</id>
+        <link href="https://wyyszl.github.io/post/dui-shu-you-hua-dij/">
         </link>
         <updated>2020-10-09T14:19:53.000Z</updated>
         <content type="html"><![CDATA[<h1 id="1复习邻接表">1.复习邻接表</h1>
@@ -632,8 +632,8 @@ int main() {
     </entry>
     <entry>
         <title type="html"><![CDATA[题解 P6056 【[加油武汉]SIR 模型】]]></title>
-        <id>https://wyyszl.top/post/ti-jie-p6056-jia-you-wu-han-sir-mo-xing/</id>
-        <link href="https://wyyszl.top/post/ti-jie-p6056-jia-you-wu-han-sir-mo-xing/">
+        <id>https://wyyszl.github.io/post/ti-jie-p6056-jia-you-wu-han-sir-mo-xing/</id>
+        <link href="https://wyyszl.github.io/post/ti-jie-p6056-jia-you-wu-han-sir-mo-xing/">
         </link>
         <updated>2020-10-09T12:45:03.000Z</updated>
         <content type="html"><![CDATA[<h3 id="这是一道微坑水题">这是一道微坑水题</h3>
@@ -684,8 +684,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[宽度优先搜索（入门）]]></title>
-        <id>https://wyyszl.top/post/kuan-du-you-xian-sou-suo-ru-men/</id>
-        <link href="https://wyyszl.top/post/kuan-du-you-xian-sou-suo-ru-men/">
+        <id>https://wyyszl.github.io/post/kuan-du-you-xian-sou-suo-ru-men/</id>
+        <link href="https://wyyszl.github.io/post/kuan-du-you-xian-sou-suo-ru-men/">
         </link>
         <updated>2020-10-09T12:12:13.000Z</updated>
         <content type="html"><![CDATA[<h1 id="队列">队列</h1>
