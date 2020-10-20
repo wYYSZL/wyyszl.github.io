@@ -2,13 +2,38 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wyyszl.github.io</id>
     <title>wYYSZL 的博客</title>
-    <updated>2020-10-18T14:54:23.937Z</updated>
+    <updated>2020-10-20T14:44:43.277Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wyyszl.github.io"/>
     <link rel="self" href="https://wyyszl.github.io/atom.xml"/>
     <logo>https://wyyszl.github.io/images/avatar.png</logo>
     <icon>https://wyyszl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, wYYSZL 的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[差分]]></title>
+        <id>https://wyyszl.github.io/post/chai-fen/</id>
+        <link href="https://wyyszl.github.io/post/chai-fen/">
+        </link>
+        <updated>2020-10-20T14:44:03.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="一-基础差分">一、基础差分</h2>
+<p>1.问题：多次区间修改，一次单点查询<br>
+2.思路：对于区间问题，我们可以使用前缀和与线段树。线段树过于复杂，我们可以从前缀和来思考。考虑到每一次单点修改，前缀和都是又该点开始到结尾的区间修改，我们可以将原数组当做某一数组的前缀和，然后对该数组进行两次单点修改，最后再求前缀和即可。<br>
+3.由原数组推差分数组：差分是前缀和的逆运算，因而我们应该先知道前缀和公式，易得为：<code>fsum[i]=fsum[i-1]+a[i];</code>，对该等式进行变形，得差分公式：<code>a[i]=fsum[i]-fsum[i-1];</code>，而对于该公式，<code>fsum</code>-&gt;a,<code>cf</code>-&gt;差分数组.<br>
+4.结果：求前缀和即为原数组更改后<br>
+5.时间复杂度：<code>O(m+n)</code></p>
+<h2 id="二-二维差分1">二、二维差分1</h2>
+<p>1.思路：将二维拆分为一维<br>
+2.时间复杂度:<code>O(mn)</code></p>
+<h2 id="二-二维差分2">二、二维差分2</h2>
+<p>1.思路：同一维<br>
+2.复习二维前缀和：<img src="https://cdn.luogu.com.cn/upload/image_hosting/moezmwuh.png" alt="" loading="lazy"><br>
+黄色部分的和即为 fsum[3][3]<br>
+公式：<code>fsum[i][j]=fsum[i-1][j]+fsum[i][j-1]-fsum[i-1][j-1]+a[i][j];</code><br>
+3.差分公式：<code>cf[i][j]=a[i][j]-a[i-1][j]-a[i][j-1]+a[i-1][j-1];</code><br>
+4.更改思路：<br>
+<img src="https://cdn.luogu.com.cn/upload/image_hosting/jf0wl7ar.png" alt="" loading="lazy"></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[点名器]]></title>
         <id>https://wyyszl.github.io/post/dian-ming-qi/</id>
@@ -860,181 +885,6 @@ int main()
 }
 </code></pre>
 <p>第一篇题解求过~</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[宽度优先搜索（入门）]]></title>
-        <id>https://wyyszl.github.io/post/kuan-du-you-xian-sou-suo-ru-men/</id>
-        <link href="https://wyyszl.github.io/post/kuan-du-you-xian-sou-suo-ru-men/">
-        </link>
-        <updated>2020-10-09T12:12:13.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="队列">队列</h1>
-<p>队列在代码中的两种表示方法：<br>
-1.数组模拟</p>
-<p>2.stl queue</p>
-<p>我们用hd(head)变量表示队头，用tl(tail)表示队尾,q[]表示队列，则：</p>
-<p>初始状态是hd=tl=1,将q[1]=a1<br>
-入队操作是t++,q[t]=入队成员</p>
-<p>出队操作是h++</p>
-<p>判断队列不空是while(h&lt;=t){}</p>
-<h2 id="栗子">栗子</h2>
-<p>将123分别入队,并按照先进先出的顺序输出</p>
-<pre><code>const int MAXN = 101;
-int q[MAXN];
-int hd, tl;
-int main()
-{
-    hd = 1; //初始值
-    tl= 1; //初始值
-    q[1] = 1;//第一个元素入队
-    tl++; q[tl] = 2;//队尾++，第二个元素入队
-    tl++; q[tl] = 3;//队尾++，第三个元素入队
-while(hd &lt;=tl) //队列非空 
-    {
-	int x = q[hd]; //去队首
-	 cout &lt;&lt; x &lt;&lt; &quot; &quot;;//输出
-	 hd++;  //出队操作
-    }
-     return 0; 
-}
-
-</code></pre>
-<pre><code class="language-cpp">1443马的遍历
-#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;cstring&gt;
-using namespace std;
-int qa[160005],qb[160005],vis[405][405],sl[405][405];
-int mx[15]={1,2,-1,-2,-1,-2,1,2};
-int my[15]={2,1,2,1,-2,-1,-2,-1};
-int n,m,s,t;
-void bfs(){
-	int hd=1,tl=1;//这样写不会和s,t搞混 
-	qa[hd]=s;
-	qb[hd]=t;
-	vis[s][t]=1;
-	sl[s][t]=0;
-	while(hd&lt;=tl){
-		for(int i=0;i&lt;=7;i++){
-			int xx=qa[hd]+mx[i];
-			int yy=qb[hd]+my[i];
-			if(!vis[xx][yy] &amp;&amp; xx&gt;=1 &amp;&amp; xx&lt;=n &amp;&amp; yy&gt;=1 &amp;&amp; yy&lt;=m){
-				vis[xx][yy]=1;
-				tl++;//队尾+1 
-				qa[tl]=xx;
-				qb[tl]=yy;
-				sl[xx][yy]=sl[qa[hd]][qb[hd]]+1;
-			}
-		}
-		hd++;
-	}
-}
-int main()
-{
-	scanf(&quot;%d%d%d%d&quot;,&amp;n,&amp;m,&amp;s,&amp;t);
-	memset(sl,0xff,sizeof sl);
-                 //不能到达则输出-1,所以初始化为-1 
-	bfs();
-	for(int i=1;i&lt;=n;i++){
-		for(int j=1;j&lt;=m;j++)
-			printf(&quot;%-5d&quot;,sl[i][j]);
-		printf(&quot;\n&quot;);
-	}
-}
-
-</code></pre>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;cmath&gt;
-#include&lt;cstring&gt;
-#include&lt;queue&gt;
-#include&lt;algorithm&gt;
-#include&lt;cstdlib&gt;
-using namespace std;
-int n,m,s,t,vis[405][405],d[405][405];
-int mx[15]={1,2,-1,-2,-1,-2,1,2};
-int my[15]={2,1,2,1,-2,-1,-2,-1};
-queue&lt;int&gt; q1;
-queue&lt;int&gt; q2;
-
-
-int main(){
-scanf(&quot;%d%d%d%d&quot;,&amp;n,&amp;m,&amp;s,&amp;t);
-memset(d,0xff,sizeof d);
-bfs();
-for(int i=1;i&lt;=n;i++){
-for(int j=1;j&lt;=m;j++)
-printf(&quot;%-5d&quot;,d[i][j]);
-printf(&quot;\n&quot;);
-}
-}
-void bfs(){
-  q1.push(s);
-  q2.push(t); vis[s][t] = 1; d[s][t] = 0;
-  while(!q1.empty() &amp;&amp; !q2.empty()){
-    int ux = q1.front(); q1.pop();
-    int uy = q2.front(); q2.pop();
-    for(int i = 0; i &lt;= 7; i++){
-      int vx = ux + mx[i];
-      int vy = uy + my[i];
-      if(vx &gt;= 1 &amp;&amp; vx &lt;= n &amp;&amp; vy&gt;=1 &amp;&amp; vy &lt;= m &amp;&amp; !vis[vx][vy]){
-        vis[vx][vy] = 1;
-        d[vx][vy] = d[ux][uy] + 1;
-        q1.push(vx);
-        q2.push(vy);
-      }
-    }
-  }
-}
-
-
-</code></pre>
-<h2 id="求细胞数量1451">求细胞数量1451</h2>
-<pre><code>#include&lt;bits/stdc++.h&gt;
-using namespace std;
-int n,m,a[105][105],cnt,p[105],q[105];/
-int movx[4]={0,1,-1,0};
-int movy[4]={1,0,0,-1};
-void bfs(int x,int y){
-int hd=1,tl=1;
-p[hd]=x;
-q[hd]=y;
-int xx,yy;
-while(hd&lt;=tl){
-for(int i=0;i&lt;=3;i++){
-xx=p[hd]+movx[i];//一定不要忘了是队首 
-yy=q[hd]+movy[i];
-if(a[xx][yy] &amp;&amp; xx&gt;=1 &amp;&amp; xx&lt;=n &amp;&amp; yy&gt;=1 &amp;&amp; yy&lt;=m){
-a[xx][yy]=0;
-tl++;
-p[tl]=xx;
-q[tl]=yy;
-}
-}
-	hd++;
-}
-}
-
-int main(){
-scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
-for(int i=1;i&lt;=n;i++)
-	for(int j=1;j&lt;=m;j++){
-		scanf(&quot;%1d&quot;,&amp;a[i][j]);//
-}
-for(int i=1;i&lt;=n;i++)
-for(int j=1;j&lt;=m;j++){
-if(a[i][j]!=0){
-a[i][j]=0;//dont forget
-cnt++;
-bfs(i,j);
-}
-}
-cout&lt;&lt;cnt&lt;&lt;endl;
-return 0; 
-}
-
-
-</code></pre>
 ]]></content>
     </entry>
 </feed>

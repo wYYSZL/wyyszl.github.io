@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>点名器 | wYYSZL 的博客</title>
+<title>差分 | wYYSZL 的博客</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -18,17 +18,10 @@
 
 
 
-    <meta name="description" content="代码
-#include&lt;bits/stdc++.h&gt;
-using namespace std;
-
-int n,k;
-string s[64];
-string t[15];
-string asdf;
-int m;
-int main..." />
-    <meta name="keywords" content="小程序" />
+    <meta name="description" content="一、基础差分
+1.问题：多次区间修改，一次单点查询
+2.思路：对于区间问题，我们可以使用前缀和与线段树。线段树过于复杂，我们可以从前缀和来思考。考虑到每一次单点修改，前缀和都是又该点开始到结尾的区间修改，我们可以将原数组当做某一数组的前缀和..." />
+    <meta name="keywords" content="差分" />
   </head>
   <body>
     <div id="app" class="main">
@@ -99,103 +92,34 @@ int main..." />
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">点名器</h2>
-            <div class="post-date">2020-10-18</div>
+            <h2 class="post-title">差分</h2>
+            <div class="post-date">2020-10-20</div>
             
             <div class="post-content" v-pre>
-              <h3 id="代码">代码</h3>
-<pre><code>#include&lt;bits/stdc++.h&gt;
-using namespace std;
-
-int n,k;
-string s[64];
-string t[15];
-string asdf;
-int m;
-int main() {
-	freopen(&quot;1.in&quot;,&quot;r&quot;,stdin);
-	cin&gt;&gt;n&gt;&gt;m&gt;&gt;k;
-	int*a;
-	a=new int [n+1]();
-	for(int i=1; i&lt;=m; ++i) {
-		cin&gt;&gt;t[i];
-	}
-	for(int i=1; i&lt;=n; ++i) {
-		cin&gt;&gt;s[i];
-	}
-	for(int i=1; i&lt;=n; ++i) {
-		cin&gt;&gt;a[i];
-		a[i] =a[i] bitor 0;
-	}
-	cin&gt;&gt;asdf;
-	for(int i=1; i&lt;=m; ++i) {
-		for(int j=1; j&lt;=n; ++j) {
-			if(s[j]==t[i]) {
-				a[j]=0x3f3f3f3f;
-				break;
-			}
-		}
-	}
-	srand(time(0));
-	for(int i=1; i&lt;=n; ++i) {
-		if(a[i]&lt;k)goto asdf;
-	}
-	cout&lt;&lt;&quot;无结果&quot;;
-asdf:
-	int tt=rand()%n;
-	if(a[tt]&gt;=k or s[tt]==asdf)goto asdf;
-	cout&lt;&lt;s[tt];
-	++a[tt];
-	freopen(&quot;1.in&quot;,&quot;w&quot;,stdout);
-	cout&lt;&lt;n&lt;&lt;' '&lt;&lt;m&lt;&lt;' '&lt;&lt;k&lt;&lt;endl;
-	for(int i=1; i&lt;=m; ++i) {
-		cout&lt;&lt;t[i]&lt;&lt;' ';
-	}
-	cout&lt;&lt;endl;
-	for(int i=1; i&lt;=n; ++i) {
-		cout&lt;&lt;s[i]&lt;&lt;' ';
-	}
-	cout&lt;&lt;endl;
-	for(int i=1; i&lt;=n; ++i) {
-		cout&lt;&lt;a[i]&lt;&lt;' ';
-	}
-	cout&lt;&lt;endl&lt;&lt;asdf&lt;&lt;endl;
-	for(int i=1; i&lt;=10; ++i)i=sqrt(i);
-
-	return  0;
-}
-</code></pre>
-<h3 id="代码解释">代码解释：</h3>
-<p>无<br>
-<s>不要问我第 22 行的用处</s></p>
-<h3 id="使用方法">使用方法</h3>
-<ul>
-<li><s>0.编译</s></li>
-<li>1.创建一个文本文档名为 1.in</li>
-<li>2.在 1.in 中输入以下格式内容：</li>
-</ul>
-<pre><code>第一行：n(总人数)，m(无需点到的人数)，k(最多次数)
-第二行：无需点到的人（用空格隔开）
-第三行:名称（用空格隔开）
-第四行：n 个 0（用空格隔开）
-第五行：任意一个无需点到的名称
-
-</code></pre>
-<ul>
-<li>3 运行</li>
-<li>4 当出现 “无结果时”，至第二部。</li>
-</ul>
-<h3 id="你可能需要">你可能需要</h3>
-<p>链接: https://pan.baidu.com/s/1yK09mb6LmGqgOP4dT4QZEA<br>
-提取码: xes9</p>
-<!-- more -->
+              <h2 id="一-基础差分">一、基础差分</h2>
+<p>1.问题：多次区间修改，一次单点查询<br>
+2.思路：对于区间问题，我们可以使用前缀和与线段树。线段树过于复杂，我们可以从前缀和来思考。考虑到每一次单点修改，前缀和都是又该点开始到结尾的区间修改，我们可以将原数组当做某一数组的前缀和，然后对该数组进行两次单点修改，最后再求前缀和即可。<br>
+3.由原数组推差分数组：差分是前缀和的逆运算，因而我们应该先知道前缀和公式，易得为：<code>fsum[i]=fsum[i-1]+a[i];</code>，对该等式进行变形，得差分公式：<code>a[i]=fsum[i]-fsum[i-1];</code>，而对于该公式，<code>fsum</code>-&gt;a,<code>cf</code>-&gt;差分数组.<br>
+4.结果：求前缀和即为原数组更改后<br>
+5.时间复杂度：<code>O(m+n)</code></p>
+<h2 id="二-二维差分1">二、二维差分1</h2>
+<p>1.思路：将二维拆分为一维<br>
+2.时间复杂度:<code>O(mn)</code></p>
+<h2 id="二-二维差分2">二、二维差分2</h2>
+<p>1.思路：同一维<br>
+2.复习二维前缀和：<img src="https://cdn.luogu.com.cn/upload/image_hosting/moezmwuh.png" alt="" loading="lazy"><br>
+黄色部分的和即为 fsum[3][3]<br>
+公式：<code>fsum[i][j]=fsum[i-1][j]+fsum[i][j-1]-fsum[i-1][j-1]+a[i][j];</code><br>
+3.差分公式：<code>cf[i][j]=a[i][j]-a[i-1][j]-a[i][j-1]+a[i-1][j-1];</code><br>
+4.更改思路：<br>
+<img src="https://cdn.luogu.com.cn/upload/image_hosting/jf0wl7ar.png" alt="" loading="lazy"></p>
 
             </div>
             
               <div class="tag-container">
                 
-                  <a href="https://wyyszl.github.io/tag/UNeeZ-Z_m/" class="tag">
-                    小程序
+                  <a href="https://wyyszl.github.io/tag/9csuAeFtd/" class="tag">
+                    差分
                   </a>
                 
               </div>
@@ -203,9 +127,9 @@ asdf:
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://wyyszl.github.io/post/2020-csp-chu-sai-mo-ni-ti-ji-da-an/">
+                <a href="https://wyyszl.github.io/post/dian-ming-qi/">
                   <h3 class="post-title">
-                    2020 CSP 初赛模拟题及答案
+                    点名器
                   </h3>
                 </a>
               </div>
