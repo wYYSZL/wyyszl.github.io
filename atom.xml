@@ -2,10 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wyyszl.github.io</id>
     <title>wYYSZL 的博客</title>
-    <updated>2020-10-20T14:44:43.277Z</updated>
+    <updated>2020-10-20T14:47:57.013Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wyyszl.github.io"/>
     <link rel="self" href="https://wyyszl.github.io/atom.xml"/>
+    <subtitle>祝大家 csp ++score and  ++rp！</subtitle>
     <logo>https://wyyszl.github.io/images/avatar.png</logo>
     <icon>https://wyyszl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, wYYSZL 的博客</rights>
