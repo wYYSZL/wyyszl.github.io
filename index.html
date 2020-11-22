@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://wyyszl.github.io/favicon.ico?v=1603205628940">
+<link rel="shortcut icon" href="https://wyyszl.github.io/favicon.ico?v=1606027054832">
 <link rel="stylesheet" href="https://wyyszl.github.io/styles/main.css">
 
 
@@ -28,7 +28,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://wyyszl.github.io">
-        <img src="https://wyyszl.github.io/images/avatar.png?v=1603205628940" class="site-logo">
+        <img src="https://wyyszl.github.io/images/avatar.png?v=1606027054832" class="site-logo">
         <h1 class="site-title">wYYSZL 的博客</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -122,6 +122,8 @@ int n,k;
 string s[64];
 string t[15];
 string asdf;
+int  f[64];
+int l=0;
 int m;
 int main() {
 	freopen(&quot;1.in&quot;,&quot;r&quot;,stdin);
@@ -149,14 +151,16 @@ int main() {
 	}
 	srand(time(0));
 	for(int i=1; i&lt;=n; ++i) {
-		if(a[i]&lt;k)goto asdf;
+		if(a[i]&lt;k){
+			f[++l]=i;
+		}
 	}
+	if(not(l))
 	cout&lt;&lt;&quot;无结果&quot;;
 asdf:
-	int tt=rand()%n;
-	if(a[tt]&gt;=k or s[tt]==asdf)goto asdf;
-	cout&lt;&lt;s[tt];
-	++a[tt];
+	int tt=rand()%(l+1)+1;
+	cout&lt;&lt;s[f[tt]];
+	++a[f[tt]];
 	freopen(&quot;1.in&quot;,&quot;w&quot;,stdout);
 	cout&lt;&lt;n&lt;&lt;' '&lt;&lt;m&lt;&lt;' '&lt;&lt;k&lt;&lt;endl;
 	for(int i=1; i&lt;=m; ++i) {
@@ -170,7 +174,7 @@ asdf:
 	for(int i=1; i&lt;=n; ++i) {
 		cout&lt;&lt;a[i]&lt;&lt;' ';
 	}
-	cout&lt;&lt;endl&lt;&lt;asdf&lt;&lt;endl;
+	cout&lt;&lt;endl&lt;&lt;s[tt]&lt;&lt;endl;
 	for(int i=1; i&lt;=10; ++i)i=sqrt(i);
 
 	return  0;
