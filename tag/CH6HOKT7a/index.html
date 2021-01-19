@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>小程序 | wYYSZL 的博客</title>
+<title>其他语言 | wYYSZL 的博客</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -88,107 +88,18 @@
 
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
-          <h2 class="current-tag">标签: 小程序</h2>
+          <h2 class="current-tag">标签: 其他语言</h2>
           
             <article class="post-item">
               <div class="left">
-                <a href="https://wyyszl.github.io/post/dian-ming-qi/">
-                  <h2 class="post-title">点名器</h2>
+                <a href="https://wyyszl.github.io/post/wen-yan/">
+                  <h2 class="post-title">文言</h2>
                 </a>
                 <div class="post-date">
-                  2020-10-18
+                  2021-01-19
                 </div>
                 <div class="post-abstract">
-                  <h3 id="代码">代码</h3>
-<pre><code>#include&lt;bits/stdc++.h&gt;
-using namespace std;
-
-int n,k;
-string s[64];
-string t[15];
-string asdf;
-int  f[64];
-int l=0;
-int m;
-int main() {
-	freopen(&quot;1.in&quot;,&quot;r&quot;,stdin);
-	cin&gt;&gt;n&gt;&gt;m&gt;&gt;k;
-	int*a;
-	a=new int [n+1]();
-	for(int i=1; i&lt;=m; ++i) {
-		cin&gt;&gt;t[i];
-	}
-	for(int i=1; i&lt;=n; ++i) {
-		cin&gt;&gt;s[i];
-	}
-	for(int i=1; i&lt;=n; ++i) {
-		cin&gt;&gt;a[i];
-		a[i] =a[i] bitor 0;
-	}
-	cin&gt;&gt;asdf;
-	for(int i=1; i&lt;=m; ++i) {
-		for(int j=1; j&lt;=n; ++j) {
-			if(s[j]==t[i]) {
-				a[j]=0x3f3f3f3f;
-				break;
-			}
-		}
-	}
-	srand(time(0));
-	for(int i=1; i&lt;=n; ++i) {
-		if(a[i]&lt;k){
-			f[++l]=i;
-		}
-	}
-	if(not(l))
-	cout&lt;&lt;&quot;无结果&quot;;
-asdf:
-	int tt=rand()%(l+1)+1;
-	cout&lt;&lt;s[f[tt]];
-	++a[f[tt]];
-	freopen(&quot;1.in&quot;,&quot;w&quot;,stdout);
-	cout&lt;&lt;n&lt;&lt;' '&lt;&lt;m&lt;&lt;' '&lt;&lt;k&lt;&lt;endl;
-	for(int i=1; i&lt;=m; ++i) {
-		cout&lt;&lt;t[i]&lt;&lt;' ';
-	}
-	cout&lt;&lt;endl;
-	for(int i=1; i&lt;=n; ++i) {
-		cout&lt;&lt;s[i]&lt;&lt;' ';
-	}
-	cout&lt;&lt;endl;
-	for(int i=1; i&lt;=n; ++i) {
-		cout&lt;&lt;a[i]&lt;&lt;' ';
-	}
-	cout&lt;&lt;endl&lt;&lt;s[tt]&lt;&lt;endl;
-	for(int i=1; i&lt;=10; ++i)i=sqrt(i);
-
-	return  0;
-}
-</code></pre>
-<h3 id="代码解释">代码解释：</h3>
-<p>无<br>
-<s>不要问我第 22 行的用处</s></p>
-<h3 id="使用方法">使用方法</h3>
-<ul>
-<li><s>0.编译</s></li>
-<li>1.创建一个文本文档名为 1.in</li>
-<li>2.在 1.in 中输入以下格式内容：</li>
-</ul>
-<pre><code>第一行：n(总人数)，m(无需点到的人数)，k(最多次数)
-第二行：无需点到的人（用空格隔开）
-第三行:名称（用空格隔开）
-第四行：n 个 0（用空格隔开）
-第五行：任意一个无需点到的名称
-
-</code></pre>
-<ul>
-<li>3 运行</li>
-<li>4 当出现 “无结果时”，至第二部。</li>
-</ul>
-<h3 id="你可能需要">你可能需要</h3>
-<p>链接: https://pan.baidu.com/s/1yK09mb6LmGqgOP4dT4QZEA<br>
-提取码: xes9</p>
-
+                  
                 </div>
               </div>
               
