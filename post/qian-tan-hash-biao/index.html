@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>浅谈 hash 表 | wYYSZL 的博客</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://wyyszl.github.io/favicon.ico?v=1611225954675">
+<link rel="stylesheet" href="https://wyyszl.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="hash 表是什么？
+散列表（Hash table，也叫哈希表），是根据关键码值(Key value)而直接进行访问的数据结构。也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做散列函数，存放记录的数..." />
+    <meta name="keywords" content="字符串" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://wyyszl.github.io">
+        <img src="https://wyyszl.github.io/images/avatar.png?v=1611225954675" class="site-logo">
+        <h1 class="site-title">wYYSZL 的博客</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      祝大家 csp ++score and  ++rp！
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/wYYSZL/wyyszl.github.io">wYYSZL</a> | <a class="rss" href="https://wyyszl.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">浅谈 hash 表</h2>
+            <div class="post-date">2021-01-19</div>
+            
+            <div class="post-content" v-pre>
+              <h3 id="hash-表是什么">hash 表是什么？</h3>
+<p>散列表（Hash table，也叫哈希表），是根据关键码值(Key value)而直接进行访问的数据结构。也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做散列函数，存放记录的数组叫做散列表。</p>
+<h2 id="为什么要用-hashhash-能干什么">为什么要用 hash（hash 能干什么？）</h2>
+<p>想想这个事情：如果百度对于一个人的一次“常搜”推荐需要 10s，那么对于全国网友来说，同时上网的人群基数很高，那么如果服务器性能不好的话，怕不是要三星 note7 qwq？？？</p>
+<p>事实上，导致这个问题的主要原因是：判断字符串是否相等（匹配）的复杂度为O（len），判断子串的复杂度可以达到二次。</p>
+<p>因此，我们要学习字符串算法。</p>
+<p>“纵使现在有很多极好用的算法，但永远无法撼动 hash 表的地位”----教练</p>
+<p>所以我们来学习 hash。</p>
+<h2 id="整体思路">整体思路：</h2>
+<p>比较两个字符串，我们还不会。</p>
+<p>但我们知道如何看两个数是否相等。</p>
+<p>那么我们可以转化数字。</p>
+<p>字符串转数字坑定不能无损（不然你要字符串干什么，而且强行转换复杂度仍很高）。</p>
+<p>不卖关子了，直接介绍：哈希的过程，其实可以看作对一个串的<strong>单向加密过程</strong>，并且需要保证所加的密不能<strong>高概率重复</strong>（就像不能让隔壁老王轻易地用它家的钥匙打开你家门一样qwq），通过这种方式来替代一些很费时间的操作。</p>
+<p>如何理解呢？</p>
+<p>对于每个串，我们通过一个<strong>固定</strong>的转换方式，将相同的串使其的“密”<strong>一定相同</strong>，不同的串 <strong>尽量</strong> 不同。</p>
+<p>此处有人指出：那难道不能先比对字符串长度，然后比对ASCLL码之和吗？事实上显然是不行的（比如ab和ba，并不是同一个串，但是如是做却会让其认为是qwq）。这种情况就叫做  <strong><em>hash 冲突</em></strong> ，并且在如此的单向加密哈希中， hash冲突的情况在所难免（bzoj就有这种让你给出一组样例，使得一段哈希代码冲突的题，读者可以尝试尝试）。</p>
+<p>而我们此处介绍的，即是最常见的一种哈希：进制哈希。进制哈希的核心便是给出一个固定进制 <strong>base</strong>，将一个串的每一个元素看做一个进制位上的数字，所以这个串就可以看做一个<strong>base</strong>进制的数，那么这个数就是这个串的哈希值；则我们通过比对每个串的的哈希值，即可判断两个串是否相同.</p>
+<p>base 一般为 131,13331，19260817 (某伟人生日)，20061113 <s>(不必在意这些细节,质数即可)</s>，其他质数</p>
+<p>为什么要用质数，这个文章讲得好：<a href="https://www.cnblogs.com/cryingrain/p/11144225.html">123</a></p>
+<h2 id="实现">实现</h2>
+<p>luogu P3370</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+typedef unsigned long long ull;
+ull base=20061113;
+ull a[10010];
+char s[10010];
+int n,ans=1;
+int prime=233317; 
+ull mod=212370440130137957ll;
+ull hashe(char s[])
+{
+    int len=strlen(s);
+    ull ans=0;
+    for (int i=0;i&lt;len;i++)
+    ans=(ans*base+(ull)s[i])%mod+prime;
+    return ans;
+}
+int main()
+{
+    scanf(&quot;%d&quot;,&amp;n);
+    for(int i=1;i&lt;=n;i++)
+    {
+        scanf(&quot;%s&quot;,s);
+        a[i]=hashe(s);
+    }
+    sort(a+1,a+n+1);
+    for(int i=1;i&lt;n;i++)
+    {
+        if(a[i]!=a[i+1])
+        ans++;
+    }
+    printf(&quot;%d&quot;,ans);
+} 
+</code></pre>
+<p>当然，再好的哈希也会有冲突，此时有两种做法可以解决或者降低哈希冲突的可能性</p>
+<h3 id="1-无错哈希">1、无错哈希</h3>
+<p>其实原理很简单，就是我们要记录每一个已经诞生的哈希值，然后对于每一个新的哈希值，我们都可以来判断是否和已有的哈希值冲突，如果冲突，那么可以将这个新的哈希值不断加上一个大质数，直到不再冲突。</p>
+<p>先贴代码：</p>
+<pre><code>for(int i=1;i&lt;=m;i++)//m个串
+{
+	cin&gt;&gt;str;//下一行的check为bool型 
+	while(check[hash(str)])hash[i]+=19260817;
+	hash[i]+= hash(str) ;
+}
+</code></pre>
+<p>但是，这种方法类似桶查找，但是桶查找的弊端2就会很恶心——数据过大， check数组无能为力来支持上亿个空间（弊端1是由于数据具有跳跃性，浪费最后的统计次数，但在此不是特别明显）</p>
+<h3 id="2-多重哈希">2、多重哈希</h3>
+<p>这其实就是你用不同的两种或多种方式哈希，然后分别比对每一种哈希值是否相同——显然是增加了空间和时间，但也确实增加了其正确性。</p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://wyyszl.github.io/tag/mrtWzKWCT/" class="tag">
+                    字符串
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://wyyszl.github.io/post/python-xue-xi-bi-ji/">
+                  <h3 class="post-title">
+                    Python 学习笔记
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>
